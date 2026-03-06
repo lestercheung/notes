@@ -1,0 +1,19 @@
+name: GH test action
+run-name: ${{ github.actor }} was here
+on: [push]
+
+jobs:
+  gh-action-test-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Step 1
+        run: echo "Hello test world!"
+
+      - name: Step 2
+        run: |
+          echo "Step 2"
+          ls -la .
+          ls -la /
