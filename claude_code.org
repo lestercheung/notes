@@ -1,0 +1,17 @@
+#+title: Claude Code
+
+* Quick start
+- create an isolated account on your system
+- npm install -g @anthropic-ai/claude-code
+- get an account at openrouter.ai, gen a key.
+- add the following to $HOME/.claude/settings.json
+
+    #+begin_src json
+    "env": {
+        "ANTHROPIC_BASE_URL": "https://openrouter.ai/api",
+        "ANTHROPIC_AUTH_TOKEN": "YOUR TOKEN",
+        "ANTHROPIC_API_KEY": "",
+        "ANTHROPIC_MODEL": "openrouter/free"
+    }
+
+    #+end_src
