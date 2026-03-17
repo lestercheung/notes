@@ -1,0 +1,33 @@
+name: Org to HTML
+run-name: org2html
+# ${{ github.actor }}
+
+on:
+  push:
+    paths:
+      - "*.org"
+
+jobs:
+  convert:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install pandoc
+        run: sudo apt-get install -y pandoc
+
+      - name: Create build directory
+        run: mkdir -p build
+
+      - name: Convert Org to HTML
+        run: |
+          for file in *.org; do
+            pandoc "$file" -o "build/${file%.org}.html"
+          done
+
+      - name: Publish artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: converted-html
+          path: build/

@@ -1,0 +1,7 @@
+#+title: Ansible
+
+* AWX Alternatives
+- [Ansible Automation Platform](https://www.redhat.com/en/technologies/management/ansible) - Redhat's version.
+- [Ascender](https://github.com/ctrliq/ascender?tab=readme-ov-file) - CIQ's fork of AWX.
+- [Semaphore UI](https://semaphoreui.com/) - a runner in Golang.
+- [ARA](https://ara.recordsansible.org/) - more like log browser.

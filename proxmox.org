@@ -1,0 +1,36 @@
+* Proxmox for production workload
+
+Proxmox is great for homelabs but there are considerations when using it for
+serious production workload. Here are my notes to document lessons planning and deploying it in an enterprise environment.
+
+
+
+** What you get (the PROs)
+... in my use case:
+- Clustered view of all of your hypervisors and their resources.
+- Well integrated Ceph for hyper-converged setup.
+- Nice webGUI that is useful for common tasks. With dashboard.
+- LDAP integration for the web/api access.
+- ZFS is there when we don't want to use Ceph for particular workload.
+
+** What you don't (the CONs)
+- No libvirt - RHEL admins are pretty used to that for a lot of tasks/tweaks.
+- No NetworkManager - uses Debian-style interfaces config. Using
+  [systemd.link](https://www.freedesktop.org/software/systemd/man/latest/systemd.link.html)
+  files to pin network interface names should be good enough.
+- No support for linux-system-roles, especially the network role.
+
+** Plan
+1. Small PoC setup with a 3 nodes cluster. With Ceph.
+2. Start a small cluster in DEV to replace existing workload.
+3. Work the DEV cluster hard to find its limit and make optimizations.
+4. Only start deploying in QA after the setup can handle the DEV environment with flying colours. Metrics: improve uptime, performance, user sentiment.
+5. Repeat the same with QA then PROD.
+
+
+** Pain-points expected
+1. [storage] Ceph prefer HBAs and we have RAID cards everywhere. Newer controllers can expose disks as regular disks and older controllers can run single-disk-RAID0.
+2. [network] Need dedicated network interfaces for ceph backend traffic.
+3. [network] 10G links is bare minimum.
+4. [network] Mixing frontend and backend traffic on the same switches might be a problem.
+5. [provisioning] Server provisioning will need rework.

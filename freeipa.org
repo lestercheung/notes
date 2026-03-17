@@ -1,0 +1,9 @@
+#+title: FreeIPA
+
+* Install commands
+
+dnf install -y ipa-server-dns ipa-server-trust-ad samba
+PW=onlydemo
+ipa-server-install -p $PW -a $PW -n home.gnub.net -r HOME.GNUB.NET --setup-dns --setup-adtrust --enable-compat --idstart 60000 --mkhomedir --ssh-trust-dns --auto-reverse --random-serial-number
+firewall-cmd --add-port={80,443,389,636,88,464,53}/tcp --add-port={88,464,53,123}/udp --permanent
+firewall-cmd --reload
